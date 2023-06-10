@@ -16,7 +16,10 @@ const shoppingCart = {
     },
 
     setProductInShoppingCart:() => {
-        console.log(objShoppingCartProducts);
+        //console.log(objShoppingCartProducts);
+
+        const products = document.querySelector(".mainContainerProducto");
+        console.log(products);
     }
 } 
 
