@@ -25,7 +25,9 @@ const objShoppingCart = {
 } 
 
 
-
+//Inicializando el proceso para emular la recuperación de productos del LocalStorage.
 objShoppingCart.initProcess();
+//Recupera los productos del LocalStorage. 
 objShoppingCart.getProductsFromStorage();
+//Muestro los productos en el Carrito de Compra.
 objShoppingCart.setProductInShoppingCart();
