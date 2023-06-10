@@ -1,13 +1,9 @@
-
-
-
 //Productos Almacenados para Vender.
 const storedProducts = [{"producto": "Cannondale", "descripcion": "Lorem ipsum"}, {"producto": "Giant", "descripcion": "Lorem ipsum"}];
 
+const shoppingCart = {
 
-const objShoppingCart = {
-
-    shoppingCartProducts : [],
+    objShoppingCartProducts : [],
 
     initProcess: ()=> {
         const productosCarritosStr = JSON.stringify(storedProducts);
@@ -16,18 +12,18 @@ const objShoppingCart = {
     },
 
     getProductsFromStorage: () => {
-        this.shoppingCartProducts =  JSON.parse(localStorage.getItem("StoredProducts"));
+        this.objShoppingCartProducts =  JSON.parse(localStorage.getItem("StoredProducts"));
     },
 
     setProductInShoppingCart:() => {
-        console.log(shoppingCartProducts);
+        console.log(objShoppingCartProducts);
     }
 } 
 
 
 //Inicializando el proceso para emular la recuperación de productos del LocalStorage.
-objShoppingCart.initProcess();
+shoppingCart.initProcess();
 //Recupera los productos del LocalStorage. 
-objShoppingCart.getProductsFromStorage();
+shoppingCart.getProductsFromStorage();
 //Muestro los productos en el Carrito de Compra.
-objShoppingCart.setProductInShoppingCart();
+shoppingCart.setProductInShoppingCart();
