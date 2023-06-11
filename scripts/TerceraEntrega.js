@@ -1,4 +1,4 @@
-//Productos Almacenados para Vender.
+//JSON: Productos Almacenados para Vender.
 const storedProducts = [
     {
         "idProducto" : "Product01",
@@ -37,7 +37,7 @@ const shoppingCart = {
     objShoppingCartProducts : [],
 
     initProcess: ()=> {
-        //Hago un stringigy sobre el array para procesarlo como JSON
+        //Hago un stringify sobre el array para procesarlo como JSON
         const productosCarritosStr = JSON.stringify(storedProducts);
         //Limpio por las dudas mi localStorage.
         localStorage.clear();
@@ -46,6 +46,7 @@ const shoppingCart = {
     },
 
     getProductsFromStorage: () => {
+        
         this.objShoppingCartProducts =  JSON.parse(localStorage.getItem("StoredProducts"));
     },
 
@@ -63,9 +64,30 @@ const shoppingCart = {
 
             card.innerHTML += "<h2>" + producto.nombreProducto + "</h2>";
             card.innerHTML += "<p>" + producto.descripcion + "</p>";
-            card.innerHTML += "<button id=" + producto.idProducto + ">Agregar al Carrito</button>"
+            card.innerHTML += "<br></br>";
+            
+            //card.innerHTML += "<button id=" + producto.idProducto + ">Agregar al Carrito</button>";
+            let btnAddProduct = document.createElement("input");
+            btnAddProduct.id = producto.idProducto;
+            btnAddProduct.name = "Agregar al Carrito";
+            btnAddProduct.type = "button";
+            btnAddProduct.onclick = function () {
+                alert("Producto Agregado al Carrito");
+            };
+            
+            // btnAddProduct.addEventListener("click", () => {
+            //     alert("Producto Agregado al Carrito")
+            // });
+            // btnAddProduct.click = function(){
+            //     alert("prueba");
+            // }
+            
+            card.appendChild(btnAddProduct);
 
-            const products = document.querySelector("#listProducts");
+            card.innerHTML += "<br></br>";
+            card.innerHTML += "<button id=" + producto.idProducto + ">Comprrar ahora</button>";
+
+            let products = document.querySelector("#listProducts");
             products.appendChild(card);
 
             console.log(card);
