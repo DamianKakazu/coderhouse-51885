@@ -66,10 +66,10 @@ const shoppingCart = {
             card.innerHTML += "<p>" + producto.descripcion + "</p>";
             card.innerHTML += "<br></br>";
             
-            card.innerHTML += "<button id=" + producto.idProducto + " onclick=\"alert('DK');\">Agregar al Carrito</button>";
+            card.innerHTML += "<button id=" + producto.idProducto + " onclick=\"Swal.fire('Quiere agregar el producto al carrito?','Esta seguro?','question') \">Agregar al Carrito</button>";
 
             card.innerHTML += "<br></br>";
-            card.innerHTML += "<button id=" + producto.idProducto + ">Comprrar ahora</button>";
+            card.innerHTML += "<button id=" + producto.idProducto + " onclick=\" Swal.fire('Quiere comprar ahora?','Esta seguro?','question') \"; >Comprrar ahora</button>";
 
             let products = document.querySelector("#listProducts");
             products.appendChild(card);
