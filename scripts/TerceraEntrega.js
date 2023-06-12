@@ -66,14 +66,15 @@ const shoppingCart = {
             card.innerHTML += "<p>" + producto.descripcion + "</p>";
             card.innerHTML += "<br></br>";
             
-            //card.innerHTML += "<button id=" + producto.idProducto + ">Agregar al Carrito</button>";
-            let btnAddProduct = document.createElement("input");
-            btnAddProduct.id = producto.idProducto;
-            btnAddProduct.name = "Agregar al Carrito";
-            btnAddProduct.type = "button";
-            btnAddProduct.onclick = function () {
-                alert("Producto Agregado al Carrito");
-            };
+            //card.innerHTML += "<button id=" + producto.idProducto + " onclick='alert('DK');'>Agregar al Carrito</button>";
+            card.innerHTML += "<button onclick=\"alert('DK');\">Ver</button>";
+            //let btnAddProduct = document.createElement("input");
+            //btnAddProduct.id = producto.idProducto;
+            //btnAddProduct.name = "Agregar al Carrito";
+            //btnAddProduct.type = "button";
+            // btnAddProduct.onclick = function () {
+            //     alert("Producto Agregado al Carrito");
+            // };
             
             // btnAddProduct.addEventListener("click", () => {
             //     alert("Producto Agregado al Carrito")
@@ -82,7 +83,7 @@ const shoppingCart = {
             //     alert("prueba");
             // }
             
-            card.appendChild(btnAddProduct);
+            //card.appendChild(btnAddProduct);
 
             card.innerHTML += "<br></br>";
             card.innerHTML += "<button id=" + producto.idProducto + ">Comprrar ahora</button>";
