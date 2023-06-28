@@ -22,9 +22,10 @@ function createCardProducts(Products){
         
         //card.innerHTML += "<button id=" + producto.idProducto + " onclick=\"Swal.fire('Quiere agregar el producto al carrito?','Esta seguro?','question') \">Agregar al Carrito</button>";
         card.innerHTML += "<button id=" + producto.idProducto + " onclick=\" agregarAlCarrito('" + producto.idProducto  +"'); \">Agregar al Carrito</button>";
+        card.innerHTML += "<button id=" + producto.idProducto + " onclick=\" listarCarrito(); \">Listar Carrito</button>";
 
         card.innerHTML += "<br></br>";
-        card.innerHTML += "<button id=" + producto.idProducto + " onclick=\" Swal.fire('Quiere comprar ahora?','Esta seguro?','question') \"; >Comprrar ahora</button>";
+        card.innerHTML += "<button id=" + producto.idProducto + " onclick=\" comprar() \"; >Comprrar ahora</button>";
 
         products.appendChild(card);
     });
@@ -66,7 +67,7 @@ function loadSelectedProduct()
 function agregarAlCarrito(productId){
     const elem = document.querySelector( '[id='+ productId +']');
     console.log(elem);
-    alert(productId);
+    // alert(productId);
     //console.log(shoppingCartProduct);
 
     if (shoppingCartProduct.length > 0)
@@ -77,19 +78,87 @@ function agregarAlCarrito(productId){
         //const elementoGuardado = selectedProduct.find(item => item.idProducto == productId)
         if (selectedProduct.indexOf(elemento) >= 0)
         {
-            alert('Producto ya seleccionado.');
+            Swal.fire({
+                icon: 'info',
+                title: '',
+                text: 'El Producto, ' + elemento.nombreProducto +', ya se encuentra en el Carrito de Compras',
+                footer: 'Pruebe en seleccionar otro producto'
+            })
+                
         }
         else{
-            alert('Producto no seleccionado.');
-            selectedProduct.push(elemento);
-
+            Swal.fire({
+                title: '¿Esta seguro que quiere sumar el ' + elemento.nombreProducto + ' al Carrito de Compra?',
+                showDenyButton: false,
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar',
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    selectedProduct.push(elemento);
+                    Swal.fire('Saved!', '', 'success')
+                } else if (result.isDenied) {
+                  Swal.fire('Changes are not saved', '', 'info')
+                }
+              })
             saveSelectedProduct();
-        }
-
-        
+        }       
     }
 }
 
+function listarCarrito()
+{
+    if (Array.isArray(selectedProduct) && selectedProduct.length > 0){
+        let productos = "";
+        for(const producto of selectedProduct)
+        {
+            productos += producto.nombreProducto + "\n";
+        }
+
+        Swal.fire({
+            icon: 'info',
+            title: 'Carrito de compra',
+            text: 'Los productos que ya se encuentran en el carrito son: ' + productos,
+            footer: ''
+        })
+
+    }else{
+        selectedProduct = [];
+        Swal.fire({
+            icon: 'info',
+            title: 'Carrito de compra',
+            text: 'No tiene productos en el carrito' ,
+            footer: ''
+        })
+    }
+
+}
+
+function comprar()
+{
+    let productos = "";
+    for(const producto of selectedProduct)
+    {
+        productos += producto.nombreProducto + "\n";
+    }
+
+    Swal.fire({
+        title: 'Felicitaciones usted ha realizar correctamente la compra! Sus productos son: ' + productos,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+    
+    selectedProduct = [];
+    //Limpio por las dudas mi localStorage.
+    localStorage.clear();
+    //Seteo los productos del Carrito de compra.
+    localStorage.setItem("StoredSelectedProducts", "");
+}
 
 
 
