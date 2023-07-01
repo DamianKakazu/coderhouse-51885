@@ -73,15 +73,14 @@ function loadSelectedProduct()
 function agregarAlCarrito(productId){
     const elem = document.querySelector( '[id='+ productId +']');
     console.log(elem);
-    // alert(productId);
-    //console.log(shoppingCartProduct);
+
 
     if (shoppingCartProduct.length > 0)
     {
         let elemento = shoppingCartProduct.find(item => item.idProducto == productId);   
         console.log(elemento);
 
-        //const elementoGuardado = selectedProduct.find(item => item.idProducto == productId)
+
         if (selectedProduct.indexOf(elemento) >= 0)
         {
             Swal.fire({
