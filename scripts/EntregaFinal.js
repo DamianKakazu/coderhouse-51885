@@ -55,7 +55,13 @@ function loadSelectedProduct()
 {
     selectedProduct =  JSON.parse(localStorage.getItem("StoredSelectedProducts"));
     if (Array.isArray(selectedProduct) && selectedProduct.length > 0){
-        alert("tiene productos");
+        Swal.fire({
+            icon: 'info',
+            title: '',
+            text: 'Usted tiene guardado productos en su carrito de compra.',
+            footer: ''
+        })
+            
     }else{
         selectedProduct = [];
     }
