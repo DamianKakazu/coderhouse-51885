@@ -67,7 +67,19 @@ function loadSelectedProduct()
     }
 }
 
-
+function valideKey(evt){
+    
+    // code is the decimal ASCII representation of the pressed key.
+    var code = (evt.which) ? evt.which : evt.keyCode;
+    
+    if(code==8) { // backspace.
+      return true;
+    } else if(code>=48 && code<=57) { // is a number.
+      return true;
+    } else{ // other keys.
+      return false;
+    }
+}
 
 
 function agregarAlCarrito(productId){
@@ -94,6 +106,13 @@ function agregarAlCarrito(productId){
         else{
             Swal.fire({
                 title: '¿Esta seguro que quiere sumar el ' + elemento.nombreProducto + ' al Carrito de Compra?',
+                html: 
+                    '<img src="'+ elemento.srcImages +'">' +
+                    '<br></br>' + 
+                    '<h2>' + elemento.nombreProducto  +'</h2>' +
+                    '<h3>Cantidad: </h3> <input type="text" id="' + elemento.nombreProducto + 'Cantidad" name="Cantidad" value="1" onkeypress="return valideKey(event);"/> ' +
+                    '<br></br>',
+                
                 showDenyButton: false,
                 showCancelButton: true,
                 confirmButtonText: 'Confirmar',
@@ -101,6 +120,7 @@ function agregarAlCarrito(productId){
               }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
+                    elemento.Cantidad = document.getElementById(elemento.nombreProducto+'Cantidad').value;
                     selectedProduct.push(elemento);
                     Swal.fire('Saved!', '', 'success')
                 } else if (result.isDenied) {
@@ -145,7 +165,7 @@ function comprar()
     let productos = "";
     for(const producto of selectedProduct)
     {
-        productos += producto.nombreProducto + "\n";
+        productos += producto.nombreProducto + "(Cantidad:" + producto.Cantidad + ")" + "\n";
     }
 
     Swal.fire({
@@ -156,6 +176,7 @@ function comprar()
         hideClass: {
           popup: 'animate__animated animate__fadeOutUp'
         }
+       
       })
     
     selectedProduct = [];
