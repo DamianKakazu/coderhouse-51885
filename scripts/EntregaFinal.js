@@ -81,6 +81,10 @@ function valideKey(evt){
     }
 }
 
+function borrarproductoseleccionado(productId){
+    const elem = document.querySelector( '[id=prdSeleccionado_'+ productId +']');
+    elem.remove();
+}
 
 function agregarAlCarrito(productId){
     const elem = document.querySelector( '[id='+ productId +']');
@@ -195,7 +199,7 @@ function ProductosSeleccionado(producto){
     let products = document.querySelector("#BuyProducts");
     
     const card = document.createElement("div");
-    card.idProducto = producto.idProducto;
+    card.idProducto = 'prdSeleccionado_' + producto.idProducto;
     card.className = "mainContainerProducto__tarjeta2 margen";
 
     card.innerHTML += "<h2> Producto Seleccionado para la Compra</h2>";
@@ -204,7 +208,7 @@ function ProductosSeleccionado(producto){
 
     card.appendChild(cardImage);
     card.innerHTML += "<h2>" + producto.nombreProducto + "(Cantidad:" + producto.Cantidad + ")"  + "</h2>";
-
+    card.innerHTML += "<button id=" + producto.idProducto + " onclick=\" borrarproductoseleccionado('" + producto.idProducto  +"'); \">Borrar producto</button>";
     card.innerHTML += "<br></br>";
     
 
