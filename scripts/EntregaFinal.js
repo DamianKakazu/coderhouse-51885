@@ -84,13 +84,13 @@ function valideKey(evt){
 
 function agregarAlCarrito(productId){
     const elem = document.querySelector( '[id='+ productId +']');
-    console.log(elem);
+
 
 
     if (shoppingCartProduct.length > 0)
     {
         let elemento = shoppingCartProduct.find(item => item.idProducto == productId);   
-        console.log(elemento);
+
 
 
         if (selectedProduct.indexOf(elemento) >= 0)
@@ -123,10 +123,14 @@ function agregarAlCarrito(productId){
                     elemento.Cantidad = document.getElementById(elemento.nombreProducto+'Cantidad').value;
                     selectedProduct.push(elemento);
                     Swal.fire('Saved!', '', 'success')
+                      //Dibujar Producto
+                    ProductosSeleccionado(elemento);
                 } else if (result.isDenied) {
                   Swal.fire('Changes are not saved', '', 'info')
                 }
               })
+          
+            
             saveSelectedProduct();
         }       
     }
@@ -187,7 +191,29 @@ function comprar()
 }
 
 
+function ProductosSeleccionado(producto){
+    let products = document.querySelector("#BuyProducts");
+    
+    const card = document.createElement("div");
+    card.idProducto = producto.idProducto;
+    card.className = "mainContainerProducto__tarjeta2 margen";
+
+    card.innerHTML += "<h2> Producto Seleccionado para la Compra</h2>";
+    const cardImage = document.createElement("img");
+    cardImage.src = producto.srcImages;
+
+    card.appendChild(cardImage);
+    card.innerHTML += "<h2>" + producto.nombreProducto + "(Cantidad:" + producto.Cantidad + ")"  + "</h2>";
+
+    card.innerHTML += "<br></br>";
+    
+
+    products.appendChild(card);
+
+}
+
+
 
 this.loadProductsShoppingCart();
-console.log(document.querySelector("#listProducts"));
+
 this.loadSelectedProduct();

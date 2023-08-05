@@ -72,6 +72,18 @@
     
 }
 
+.mainContainerProducto__tarjeta2{
+    border: 1px solid rgb(223, 69, 69);  /* Borde para la tarjeta */
+    border-radius: 8px; /* Borde redondeado*/   
+    padding:20px;
+    width: 300px;
+}
+.mainContainerProducto__tarjeta2 img{
+    width: 100%;
+    border-radius: 8px;
+    
+}
+
 
 /* Fin - Estilo Main */
 
